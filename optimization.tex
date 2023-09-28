@@ -6,4 +6,27 @@ COMPILER OPTIMIZATION CONCEPTS:
 
 3. Branching Techniques: to prevent misprediction of branching, we can use loop unrolling, inlining, and branch prediction hints. 
 
-  
+Components of our Trading System:
+
+1. Market Data Publisher - it is responisble for sending out information of any arbitrary changes to the limit order book maintained by the matching engine to its participants.
+Uses UDP multicast as the network protocol. Changes machine engine data format into market data format so the participants can understand and parse data.
+
+2. Matching Engine - Most important piece in the puzzle. Takes care of requests from market participants for their orders. Also updates the orderbook based on buy-sell 
+order changes. The order book is a collection of orders sent by all market participants, placed in a single book which comprises of bids and asks.
+
+3. Order Gateway Server - accepts connections from the market participants so that they can send request for orders and receive notifications hwen there are
+updates to their orders. Translates messages between the matching engine fromat and the order gateway messaging protocol. TCP is used for the order gateway server.
+TCP protects data packets and ensures data packet loss recovery.
+
+4. Market Data Consumer - is the complement of the exchange market data publisher component on the market participants' side. This component is responsible for subscribing
+to the UDP stream or the TCP server set up by the market data publisher.
+
+5. Order Gateway Encoder and Decoder Client - it is the equivalent of the exchange order gateway server but on the participants side. Maintains TCP connections with the
+exchange's order gateway infrastructure.
+
+6. Trading Engine - is the brain of a market participants trading system. This is where intelligence resides, and where the trading decisions are made.
+
+7. Matching Algorithm - First In, First out
+
+
+

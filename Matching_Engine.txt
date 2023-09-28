@@ -1,0 +1,6 @@
+Design: 
+
+Threading Model - Market data Publisher and Order Gateway Server will be independent threads. This is intentional so both can operate independently.
+
+1. Build Threads, Set Affinity on them, assign tasks for each threads
+2. Communication between Threads - Lock-free queue. Lock-free FIFO queue.
